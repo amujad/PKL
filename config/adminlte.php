@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'title' => 'AdminLTE 3',
+    'title' => 'SIMOPA',
     'title_prefix' => '',
     'title_postfix' => '',
 
@@ -45,11 +45,11 @@ return [
     |
     */
 
-    'logo' => '<b>Admin</b>LTE',
-    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',
-    'logo_img_class' => 'brand-image img-circle elevation-3',
+    'logo' => '<b>SIMOPA</b>',
+    'logo_img' => 'images/logo_simopa.png',
+    'logo_img_class' => 'brand-image img-circle elevation-3 bg-light',
     'logo_img_xl' => null,
-    'logo_img_xl_class' => 'brand-image-xs',
+    'logo_img_xl_class' => 'brand-image-xs bg-light',
     'logo_img_alt' => 'AdminLTE',
 
     /*
@@ -64,7 +64,7 @@ return [
     |
     */
 
-    'usermenu_enabled' => true,
+    'usermenu_enabled' => false,
     'usermenu_header' => false,
     'usermenu_header_class' => 'bg-primary',
     'usermenu_image' => false,
@@ -101,12 +101,12 @@ return [
     |
     */
 
-    'classes_auth_card' => 'card-outline card-primary',
-    'classes_auth_header' => '',
+    'classes_auth_card' => 'card-outline card-light shadow',
+    'classes_auth_header' => 'text-center',
     'classes_auth_body' => '',
     'classes_auth_footer' => '',
-    'classes_auth_icon' => '',
-    'classes_auth_btn' => 'btn-flat btn-primary',
+    'classes_auth_icon' => 'text-olive',
+    'classes_auth_btn' => 'btn-flat bg-olive',
 
     /*
     |--------------------------------------------------------------------------
@@ -126,9 +126,9 @@ return [
     'classes_content_wrapper' => '',
     'classes_content_header' => '',
     'classes_content' => '',
-    'classes_sidebar' => 'sidebar-dark-primary elevation-4',
+    'classes_sidebar' => 'sidebar-dark-teal elevation-4',
     'classes_sidebar_nav' => '',
-    'classes_topnav' => 'navbar-white navbar-light',
+    'classes_topnav' => 'navbar-teal navbar-light',
     'classes_topnav_nav' => 'navbar-expand',
     'classes_topnav_container' => 'container',
 
@@ -187,7 +187,7 @@ return [
     */
 
     'use_route_url' => false,
-    'dashboard_url' => 'home',
+    'dashboard_url' => '',
     'logout_url' => 'logout',
     'login_url' => 'login',
     'register_url' => 'register',
@@ -225,87 +225,98 @@ return [
 
     'menu' => [
         [
-            'text' => 'search',
-            'search' => true,
-            'topnav' => true,
+            'text'        => 'Dashboard',
+            'url'         => 'admin',
+            'icon'        => 'fas fa-fw fa-tachometer-alt',
+            'can' => 'isAdmin'
         ],
         [
-            'text' => 'blog',
-            'url'  => 'admin/blog',
-            'can'  => 'manage-blog',
+            'text'        => 'Dashboard',
+            'url'         => 'pos',
+            'icon'        => 'fas fa-fw fa-tachometer-alt',
+            'can' => 'isPos'
+        ],
+
+        [
+            'header'    => 'Profile'
+        ],
+
+        [
+            'text' => 'Edit Profile',
+            'url'   => 'profile',
+            'icon'  => 'fas fa-fw fa-user',
         ],
         [
-            'text'        => 'pages',
-            'url'         => 'admin/pages',
-            'icon'        => 'far fa-fw fa-file',
-            'label'       => 4,
-            'label_color' => 'success',
+            'text' => 'Ganti Password',
+            'url'   => 'ganti-password',
+            'icon'  => 'fas fa-fw fa-key',
         ],
-        ['header' => 'account_settings'],
+
         [
-            'text' => 'profile',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-user',
+            'header' => 'Manajemen',
+            'can' => 'isAdmin'
         ],
         [
-            'text' => 'change_password',
-            'url'  => 'admin/settings',
-            'icon' => 'fas fa-fw fa-lock',
+            'text' => 'Users',
+            'url'  => 'admin/users',   
+            'icon' => 'fas fa-fw fa-users',
+            'can' => 'isAdmin'
         ],
         [
-            'text'    => 'multilevel',
-            'icon'    => 'fas fa-fw fa-share',
+            'text' => 'Pengiriman',
+            'url'  => 'admin/pengiriman',
+            'icon' => 'fas fa-fw fa-shipping-fast',
+            'can' => 'isAdmin'
+        ],
+
+        [
+            'header' => 'Pengiriman',
+            'can' => ['isPos','isMejaIII']
+        ],
+        [
+            'text' => 'Tugas Pengiriman',
+            'url' => 'pos/Tugas',
+            'icon' => 'fas fa-fw fa-tasks',
+            'can' => 'isPos'
+        ],
+        [
+            'text' => 'Pengiriman Baru',
+            'url' => 'pos/pengiriman-baru',
+            'icon' => 'fas fa-fw fa-plus-square',
+            'can' => 'isPos'
+        ],
+        [
+            'text' => 'Pengiriman Terkirim',
+            'url' => 'pos/pengiriman-terkirim',
+            'icon' => 'fas fa-fw fa-check-square',
+            'can' => 'isPos'
+        ],
+
+
+        [
+            'text' => 'Daftar Pengiriman',
+            'can' => 'isMejaIII',
+            'icon' => 'fas fa-fw fa-list',
             'submenu' => [
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
-                ],
-                [
-                    'text'    => 'level_one',
-                    'url'     => '#',
-                    'submenu' => [
-                        [
-                            'text' => 'level_two',
-                            'url'  => '#',
-                        ],
-                        [
-                            'text'    => 'level_two',
-                            'url'     => '#',
-                            'submenu' => [
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                                [
-                                    'text' => 'level_three',
-                                    'url'  => '#',
-                                ],
-                            ],
-                        ],
+                    'text' => 'Semua Pengiriman',
+                    'url' => 'mejaIII/',
                     ],
+                [
+                'text' => 'Pengiriman Diproses',
+                'url' => 'mejaIII/Diproses',
                 ],
                 [
-                    'text' => 'level_one',
-                    'url'  => '#',
+                'text' => 'Pengiriman Terproses',
+                'url' => 'mejaIII/Terproses',
+                ],
+                [
+                    'text' => 'Pengiriman Terkirim',
+                    'url' => 'mejaIII/Terkirim',
                 ],
             ],
         ],
-        ['header' => 'labels'],
-        [
-            'text'       => 'important',
-            'icon_color' => 'red',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'warning',
-            'icon_color' => 'yellow',
-            'url'        => '#',
-        ],
-        [
-            'text'       => 'information',
-            'icon_color' => 'cyan',
-            'url'        => '#',
-        ],
+
     ],
 
     /*
@@ -344,21 +355,21 @@ return [
 
     'plugins' => [
         'Datatables' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',
                 ],
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',
                 ],
                 [
                     'type' => 'css',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',
                 ],
             ],
@@ -374,7 +385,7 @@ return [
                 [
                     'type' => 'css',
                     'asset' => false,
-                    'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
+                    'location' =>    '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',
                 ],
             ],
         ],
@@ -389,11 +400,11 @@ return [
             ],
         ],
         'Sweetalert2' => [
-            'active' => false,
+            'active' => true,
             'files' => [
                 [
                     'type' => 'js',
-                    'asset' => false,
+                    'asset' => true,
                     'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',
                 ],
             ],

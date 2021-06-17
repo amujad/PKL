@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -26,7 +28,6 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = RouteServiceProvider::HOME;
 
     /**
      * Create a new controller instance.
@@ -36,5 +37,34 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    public function login(Request $request){
+        $credentials = $request->only('email','password');
+
+        if (Auth::attempt($credentials)){
+            $user = Auth::user();
+            if($user->user_type == 'admin'){
+                return redirect()->route('dashboardAdmin');
+            }
+            else if($user->user_type == 'pos'){
+                return redirect()->route('dashboardPos');
+            }
+            else if($user->user_type == 'mejaIII'){
+                return redirect()->route('mejaIII');
+            }
+        }
+        else{
+            return back()->withErrors([
+                'email' => 'Email atau password tidak sesuai',
+                'password' => 'Email atau password tidak sesuai',
+            ]);
+        }
+    }
+    
+    public function logout(Request $request){
+        $request->session()->flush();
+        Auth::logout();
+        return Redirect('login');
     }
 }

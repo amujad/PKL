@@ -23,7 +23,7 @@
 
     {{-- Brand text --}}
     <span class="brand-text font-weight-light {{ config('adminlte.classes_brand_text') }}">
-        {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
+        {!! config('adminlte.logo', '<b>SIMOPA</b>') !!}{{Auth::user()->user_type}}
     </span>
 
 </a>

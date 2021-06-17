@@ -16,13 +16,6 @@ class PengirimanSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('pengiriman')->insert([
-            'nomor' => 'ak12345bb',
-            'pemilik' => 'akaya sapa',
-            'resi' => '18210865433',
-            'status' => 'terkirim',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        
     }
 }

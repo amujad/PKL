@@ -10,24 +10,32 @@
 
 @section('adminlte_css')
     @stack('css')
+    <style>
+     .login-page{
+        background-image: asset('images/logo_PA.jpg') no-repeat center center fixed;);
+        -webkit-background-size: cover;
+        -moz-background-size: cover;
+        background-size: cover;
+        -o-background-size: cover;
+     }
+    </style>
     @yield('css')
 @stop
 
 @section('classes_body'){{ ($auth_type ?? 'login') . '-page' }}@stop
 
 @section('body')
-    <div class="{{ $auth_type ?? 'login' }}-box">
-
+    <div class="{{ $auth_type ?? 'login' }}-box bg-olive shadow">
         {{-- Logo --}}
-        <div class="{{ $auth_type ?? 'login' }}-logo">
-            <a href="{{ $dashboard_url }}">
-                <img src="{{ asset(config('adminlte.logo_img')) }}" height="50">
+        <div class="{{ $auth_type ?? 'login' }}-logo ">
+            <a href="{{ $dashboard_url }}" class="bg-olive">
+                <img src="{{ asset(config('adminlte.logo_img')) }}" class="mt-3" height="150"><br>
                 {!! config('adminlte.logo', '<b>Admin</b>LTE') !!}
             </a>
         </div>
 
         {{-- Card Box --}}
-        <div class="card {{ config('adminlte.classes_auth_card', 'card-outline card-primary') }}">
+        <div class="card {{ config('adminlte.classes_auth_card', 'card-outline card-primary') }} ">
 
             {{-- Card Header --}}
             @hasSection('auth_header')
